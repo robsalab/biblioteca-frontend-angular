@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">  
+  <span>BIBLIOTECA</span>
+  <span class="example-spacer"></span> 
+  <button mat-icon-button class="example-icon home-icon" aria-label="Example icon-button with heart icon" [routerLink]="['home']">
+    <mat-icon>home</mat-icon>
+  </button> &nbsp;  
+  <button mat-raised-button color="accent" [routerLink]="['biblioteca']">
+    <mat-icon>settings</mat-icon> GERENCIAR
+  </button> 
+</mat-toolbar>
+<router-outlet></router-outlet>

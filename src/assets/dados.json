@@ -1,0 +1,5 @@
+[
+    { "_id": "1", "name": "Senhor dos Anéis", "category": "Livro" },
+    { "_id": "2", "name": "Robbits", "category": "Livro" },
+    { "_id": "3", "name": "Medicina", "category": "Manual" }
+]

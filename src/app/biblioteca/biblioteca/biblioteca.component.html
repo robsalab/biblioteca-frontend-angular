@@ -1,0 +1,85 @@
+<div class="body-center">
+<mat-card>
+    <button mat-raised-button color="accent" (click)="openDialog()"><mat-icon>star</mat-icon> NOVO</button>
+    
+    <mat-form-field appearance="standard" style="width: 100%;">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Digite aqui" #input>        
+    </mat-form-field>    
+        
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <ng-container matColumnDef="stRegistroAtivo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center; width: 20px;"> Status </th>
+            <td mat-cell *matCellDef="let dado">
+                <mat-icon aria-hidden="false" aria-label="edit" color="green" *ngIf="dado.stRegistroAtivo == 'S'">
+                    <span class="material-icons-outlined">visibility</span>
+                </mat-icon>
+                <mat-icon aria-hidden="false" aria-label="edit" color="warn" *ngIf="dado.stRegistroAtivo == 'N'">
+                    <span class="material-icons-outlined">visibility_off</span>
+                </mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="_id">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 50px;" mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let dado" > {{dado._id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let dado"> {{dado.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ano">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 70px;" mat-sort-header> Ano da<br> publicação </th>
+            <td mat-cell *matCellDef="let dado" style="text-align: center;"> {{dado.ano}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dtCadastro">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center; width: 70px;" mat-sort-header> Data de<br> Cadastro </th>
+            <td mat-cell *matCellDef="let dado"> {{dado.dtCadastro | date:"d/m/Y"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+            <td mat-cell *matCellDef="let dado" style="text-align: center; width: 70px;">  
+                <mat-icon aria-hidden="false" aria-label="Categoria do Curso" style="text-align: center;">{{dado.category | category}}</mat-icon>
+            </td>
+        </ng-container>  
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef style="text-align: right; width: 150px;" mat-sort-header> Ação </th>
+            <td mat-cell *matCellDef="let dado" style="text-align: center;">  
+                <button mat-stroked-button (click)="editDados(dado)" style="margin-right: 10px;" color="accent">
+                    <mat-icon aria-hidden="false" aria-label="edit">
+                        <span class="material-icons-outlined">edit</span>
+                    </mat-icon>
+                </button>                    
+                <button mat-stroked-button (click)="deleteDados(dado)" color="warn" *ngIf="dado.stRegistroAtivo == 'S'">
+                    <mat-icon aria-hidden="false" aria-label="delete">
+                        <span class="material-icons-outlined">disabled_visible</span>
+                    </mat-icon>
+                </button>   
+                <button mat-stroked-button (click)="ativarDados(dado)" *ngIf="dado.stRegistroAtivo == 'N'">
+                    <mat-icon aria-hidden="false" aria-label="delete">
+                        <span class="material-icons-outlined">disabled_visible</span>
+                    </mat-icon>
+                </button>                    
+            </td>
+        </ng-container>            
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>  
+    <div *ngIf="dataSource; else loading "></div> 
+    <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" aria-label="Select page of users"></mat-paginator>
+    
+    <ng-template #loading>
+        <div class="loading-spinner">
+            <mat-spinner color="primary"></mat-spinner>
+        </div>        
+    </ng-template>
+     
+</mat-card>
+</div>

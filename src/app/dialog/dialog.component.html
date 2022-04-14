@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>CADASTRAR <strong>NOVO</strong></h1>
+<div mat-dialog-content>
+    
+    <form [formGroup]="dadosForm" #formDir="ngForm">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Título</mat-label>
+            <input formControlName="name" required matInput placeholder="Título">        
+        </mat-form-field> 
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo de Documento</mat-label>
+            <mat-select formControlName="biblioteca" required placeholder="Selecione o Documento">
+                <mat-option value="" disabled>Selecione o Documento</mat-option>
+                <mat-option *ngFor="let tp of listTipoDocumento" [value]="tp.value">
+                    {{ tp.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Autor</mat-label>
+            <input formControlName="autor" required matInput placeholder="Autor">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Ano</mat-label>
+            <input formControlName="ano" required  matInput type="number" placeholder="Ano">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Editora</mat-label>
+            <input formControlName="editora" matInput placeholder="Editora">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Palavras-Chave</mat-label>
+            <input formControlName="palavraChave" matInput placeholder="Palavras-Chave">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria e Sub Categoria</mat-label>
+            <mat-select formControlName="category" required placeholder="Selecione a Categoria">
+                <mat-option value="" disabled>Selecione a Categoria</mat-option>
+                <mat-option *ngFor="let cat of listCategory" [value]="cat.value">
+                    {{ cat.name }}
+                </mat-option>
+            </mat-select> 
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>URL Documento</mat-label>
+            <input formControlName="urlDoc" required  matInput placeholder="URL">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>URL BVS</mat-label>
+            <input formControlName="urlBvs" matInput placeholder="URL">        
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>URL Imagem</mat-label>
+            <input formControlName="urlImagem" required  matInput placeholder="URL">        
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Referência</mat-label>
+            <textarea formControlName="referencia" matInput placeholder="Referência"></textarea>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Resumo</mat-label>
+            <textarea formControlName="resumo" matInput placeholder="Resumo"></textarea>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Data da Publicação</mat-label>
+            <input formControlName="dtCadastro" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    </form>
+    
+</div>
+<div mat-dialog-action [align]="'end'" style="margin-top: 10px;">
+    <button mat-raised-button color="warn" mat-dialog-close style="margin-right: 10px;">Fechar</button>
+    <button mat-raised-button color="accent" (click)="saveDados()" ng-disabled="progress">{{actionBtn}}</button>
+</div>
