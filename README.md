@@ -1,5 +1,5 @@
 # biblioteca-frontend-angular
- Cadastro de biblioteca utilizando jangular 11
+ Cadastro de biblioteca utilizando Angular e angular material ui
  
  # AppBiblioteca
 
